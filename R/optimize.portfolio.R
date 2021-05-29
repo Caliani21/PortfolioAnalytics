@@ -130,9 +130,14 @@ optimize.portfolio_v1 <- function(
 		  steptol=round(N*1.5)
       DEcformals$steptol=steptol
       }
+	    	if(!hasArg(F)) {
+		  # JADE mutation parameter for meanF
+		  tmp.F=0.5
+      DEcformals$F=tmp.F
+      }
 		if(!hasArg(c)) {
 		  # JADE mutation parameter, this could maybe use some adjustment
-		  tmp.c=.4
+		  tmp.c=0.1
       DEcformals$c=tmp.c
       }
         if(!hasArg(storepopfrom)) {
@@ -854,10 +859,15 @@ optimize.portfolio <- optimize.portfolio_v2 <- function(
         # number of assets times 1.5 tries to improve
         steptol=round(N*1.5)
         DEcformals$steptol=steptol
-        } 
+        }
+      if(!hasArg(F)) {
+	# JADE mutation parameter for meanF
+	tmp.F=0.5
+      DEcformals$F=tmp.F
+      }
       if(!hasArg(c)) {
         # JADE mutation parameter, this could maybe use some adjustment
-        tmp.c=0.4
+        tmp.c=0.1
         DEcformals$c=tmp.c
         }
       if(!hasArg(storepopfrom)) {
