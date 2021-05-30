@@ -135,6 +135,11 @@ optimize.portfolio_v1 <- function(
 		  tmp.F=0.5
       DEcformals$F=tmp.F
       }
+      		if(!hasArg(p)) {
+		  # JADE mutation parameter for p
+		  tmp.p=0.05
+      DEcformals$p=tmp.p
+      }
 		if(!hasArg(c)) {
 		  # JADE mutation parameter, this could maybe use some adjustment
 		  tmp.c=0.1
@@ -863,13 +868,18 @@ optimize.portfolio <- optimize.portfolio_v2 <- function(
       if(!hasArg(F)) {
 	# JADE mutation parameter for meanF
 	tmp.F=0.5
-      DEcformals$F=tmp.F
+        DEcformals$F=tmp.F
+      }
+      if(!hasArg(p)) {
+	# JADE mutation parameter for p
+	tmp.p=0.05
+        DEcformals$p=tmp.p
       }
       if(!hasArg(c)) {
         # JADE mutation parameter, this could maybe use some adjustment
         tmp.c=0.1
         DEcformals$c=tmp.c
-        }
+      }
       if(!hasArg(storepopfrom)) {
         storepopfrom=1
         DEcformals$storepopfrom=storepopfrom
