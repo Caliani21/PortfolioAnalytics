@@ -646,7 +646,7 @@ constrained_objective <- constrained_objective_v2 <- function(w, R, portfolio, .
         # now set the new value of the objective output
         if(inherits(objective, "return_objective")){ 
           if (!is.null(objective$target) & is.numeric(objective$target)){ # we have a target
-            out <- out + penalty*abs(objective$multiplier)*abs(tmp_measure - objective$target)
+            out <- out + penalty*abs(objective$multiplier)*max(objective$target-tmp_measure,0)
           }  
           # target is null or doesn't exist, just maximize, or minimize violation of constraint
           out <- out + objective$multiplier*tmp_measure
