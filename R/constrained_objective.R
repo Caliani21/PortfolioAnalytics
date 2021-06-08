@@ -185,7 +185,7 @@ constrained_objective_v1 <- function(w, R, constraints, ..., trace=FALSE, normal
           # now set the new value of the objective output
           if(inherits(objective,"return_objective")){ 
               if (!is.null(objective$target) & is.numeric(objective$target)){ # we have a target
-                  out = out + penalty*abs(objective$multiplier)*abs(tmp_measure-objective$target)
+                  out = out + penalty*abs(objective$multiplier)*max(objective$target-tmp_measure,0)
               }  
               # target is null or doesn't exist, just maximize, or minimize violation of constraint
               out = out + objective$multiplier*tmp_measure
@@ -724,7 +724,7 @@ constrained_objective <- constrained_objective_v2 <- function(w, R, portfolio, .
               act_hhi <- sum(tmp_measure[[3]]^2)/100
               # minimum possible HHI
               min_hhi <- sum(rep(1/length(tmp_measure[[3]]), length(tmp_measure[[3]]))^2)/100
-              out <- out + penalty * objective$multiplier * abs(act_hhi - min_hhi)
+              out <- out + objective$multiplier * abs(act_hhi - min_hhi)
             }
           }
         } # end handling of risk_budget objective
