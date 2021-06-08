@@ -187,8 +187,9 @@ constrained_objective_v1 <- function(w, R, constraints, ..., trace=FALSE, normal
               if (!is.null(objective$target) & is.numeric(objective$target)){ # we have a target
                   out = out + penalty*abs(objective$multiplier)*max(objective$target-tmp_measure,0)
               }  
-              # target is null or doesn't exist, just maximize, or minimize violation of constraint
-              out = out + objective$multiplier*tmp_measure
+              else { # target is null or doesn't exist, just maximize, or minimize violation of constraint
+                  out = out + objective$multiplier*tmp_measure
+              }
           } # end handling for return objectives
 
           if(inherits(objective,"portfolio_risk_objective")){
@@ -648,8 +649,9 @@ constrained_objective <- constrained_objective_v2 <- function(w, R, portfolio, .
           if (!is.null(objective$target) & is.numeric(objective$target)){ # we have a target
             out <- out + penalty*abs(objective$multiplier)*max(objective$target-tmp_measure,0)
           }  
-          # target is null or doesn't exist, just maximize, or minimize violation of constraint
-          out <- out + objective$multiplier*tmp_measure
+          else { # target is null or doesn't exist, just maximize, or minimize violation of constraint
+            out <- out + objective$multiplier*tmp_measure
+          }
         } # end handling for return objectives
         
         if(inherits(objective, "portfolio_risk_objective")){
