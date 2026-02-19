@@ -257,6 +257,10 @@ constrained_objective_v1 <- function(w, R, constraints, ..., trace=FALSE, normal
                     # out = out + penalty * objective$multiplier * max_diff
                     out = out + penalty*objective$multiplier * max_diff
                 }
+                if(isTRUE(objective$min_concentration)){
+                    max_conc <- max(tmp_measure[[2]]) # second element is the contribution in absolute terms
+                    out = out + objective$multiplier * max_conc
+                }
             }
           } # end handling of risk_budget objective
 
@@ -720,12 +724,8 @@ constrained_objective <- constrained_objective_v2 <- function(w, R, portfolio, .
               out = out + penalty*objective$multiplier * max_diff
             }
             if(isTRUE(objective$min_concentration)){
-              # use HHI to calculate concentration
-              # actual HHI
-              act_hhi <- sum(tmp_measure[[3]]^2)/100
-              # minimum possible HHI
-              min_hhi <- sum(rep(1/length(tmp_measure[[3]]), length(tmp_measure[[3]]))^2)/100
-              out <- out + penalty * objective$multiplier * abs(act_hhi - min_hhi)
+              max_conc <- max(tmp_measure[[2]]) # second element is the contribution in absolute terms
+              out = out + objective$multiplier * max_conc
             }
           }
         } # end handling of risk_budget objective
