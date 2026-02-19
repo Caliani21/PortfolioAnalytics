@@ -259,7 +259,7 @@ constrained_objective_v1 <- function(w, R, constraints, ..., trace=FALSE, normal
                 }
                 if(isTRUE(objective$min_concentration)){
                     max_conc <- max(tmp_measure[[2]]) # second element is the contribution in absolute terms
-                    out = out + objective$multiplier * max_conc
+                    out = out + penalty * objective$multiplier * max_conc
                 }
             }
           } # end handling of risk_budget objective
@@ -710,8 +710,8 @@ constrained_objective <- constrained_objective_v2 <- function(w, R, portfolio, .
           #             if(!is.null(objective$min_concentration)){
           #                 if(isTRUE(objective$min_concentration)){
           #                     max_conc<-max(tmp_measure[[2]]) #second element is the contribution in absolute terms
-          #                     # out=out + penalty * objective$multiplier * max_conc
-          #                     out = out + objective$multiplier * max_conc
+          #                     # out=out + penalty * 
+          #                     out = out + 
           #                 }
           #             }
           # Combined min_con and min_dif to take advantage of a better concentration obj measure
@@ -725,7 +725,7 @@ constrained_objective <- constrained_objective_v2 <- function(w, R, portfolio, .
             }
             if(isTRUE(objective$min_concentration)){
               max_conc <- max(tmp_measure[[2]]) # second element is the contribution in absolute terms
-              out = out + objective$multiplier * max_conc
+              out = out + penalty * objective$multiplier * max_conc
             }
           }
         } # end handling of risk_budget objective
