@@ -910,7 +910,7 @@ optimize.portfolio <- optimize.portfolio_v2 <- function(
       }
       if(!hasArg(p)) {
 	# JADE mutation parameter for p
-	tmp.p=0.20,
+	tmp.p=0.20
         DEcformals$p=tmp.p
       }
       if(!hasArg(c)) {
