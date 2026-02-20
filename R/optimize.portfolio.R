@@ -132,7 +132,7 @@ optimize.portfolio_v1 <- function(
       }
 	    	if(!hasArg(F)) {
 		  # JADE mutation parameter for meanF
-		  tmp.F=0.50
+		  tmp.F=0.80
       DEcformals$F=tmp.F
       }
       		if(!hasArg(p)) {
@@ -905,7 +905,7 @@ optimize.portfolio <- optimize.portfolio_v2 <- function(
         }
       if(!hasArg(F)) {
 	# JADE mutation parameter for meanF
-	tmp.F=0.50
+	tmp.F=0.80
         DEcformals$F=tmp.F
       }
       if(!hasArg(p)) {
