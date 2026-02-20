@@ -483,7 +483,7 @@ rp_transform <- function(w,
     # Reset the random index based on the maximum position constraint
     # This basically allows us to generate a portfolio of max_pos assets 
     # with the given constraints and then add assets with zero weight
-    random_index <- sample(1:length(tmp_w), max_pos)
+    random_index <- order(abs(tmp_w), decreasing = TRUE)[1:max_pos]
     
     # Get the index values that are not in random_index and set them equal to 0
     full_index <- 1:length(tmp_w)
