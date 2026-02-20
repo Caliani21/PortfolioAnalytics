@@ -249,23 +249,23 @@ constrained_objective_v1 <- function(w, R, constraints, ..., trace=FALSE, normal
 #                 }
 #             }
             # Combined min_con and min_dif to take advantage of a better concentration obj measure
-            if(!is.null(objective$min_difference) || !is.null(objective$min_concentration)){
-                if(isTRUE(objective$min_difference)){
+            if(!is.null(objective$min_concentration) || !is.null(objective$min_max)){
+                if(isTRUE(objective$min_concentration)){
 #                     max_diff<-max(tmp_measure[[2]]-(sum(tmp_measure[[2]])/length(tmp_measure[[2]]))) #second element is the contribution in absolute terms
                   # Uses Herfindahl index to calculate concentration; added scaling perc diffs back to univariate numbers
                     max_diff <- sqrt(sum(tmp_measure[[3]]^2))/100  #third element is the contribution in percentage terms
                     # out = out + penalty * objective$multiplier * max_diff
                     out = out + penalty*objective$multiplier * max_diff
                 }
-                if(isTRUE(objective$min_concentration)){
+                if(isTRUE(objective$min_max)){
                       total_risk <- tmp_measure[[1]]
-                      max_conc <- max(tmp_measure[[2]])
+                      max_cont <- max(tmp_measure[[2]])
                       # Domain restriction: risk decomposition requires positive total risk.
                       # When CVaR <= 0 (tail gains), concentration is undefined — penalize.
                       if(is.na(total_risk) || total_risk <= 0){
                         out <- out + penalty
                       } else {
-                        out <- out + penalty * objective$multiplier * max_conc
+                        out <- out + penalty * objective$multiplier * max_cont
                       }
                 }
             }
@@ -722,23 +722,23 @@ constrained_objective <- constrained_objective_v2 <- function(w, R, portfolio, .
           #                 }
           #             }
           # Combined min_con and min_dif to take advantage of a better concentration obj measure
-          if(!is.null(objective$min_difference) || !is.null(objective$min_concentration)){
-            if(isTRUE(objective$min_difference)){
+          if(!is.null(objective$min_concentration) || !is.null(objective$min_max)){
+            if(isTRUE(objective$min_concentration)){
               # max_diff<-max(tmp_measure[[2]]-(sum(tmp_measure[[2]])/length(tmp_measure[[2]]))) #second element is the contribution in absolute terms
               # Uses Herfindahl index to calculate concentration; added scaling perc diffs back to univariate numbers
               max_diff <- sqrt(sum(tmp_measure[[3]]^2))/100  #third element is the contribution in percentage terms
               # out = out + penalty * objective$multiplier * max_diff
               out = out + penalty*objective$multiplier * max_diff
             }
-            if(isTRUE(objective$min_concentration)){
+            if(isTRUE(objective$min_max)){
                total_risk <- tmp_measure[[1]]
-               max_conc <- max(tmp_measure[[2]])
+               max_cont <- max(tmp_measure[[2]])
                # Domain restriction: risk decomposition requires positive total risk.
                # When CVaR <= 0 (tail gains), concentration is undefined — penalize.
                if(is.na(total_risk) || total_risk <= 0){
                 out <- out + penalty
                } else {
-                out <- out + penalty * objective$multiplier * max_conc
+                out <- out + penalty * objective$multiplier * max_cont
                }
             }
           }
