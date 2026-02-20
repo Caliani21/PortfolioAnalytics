@@ -241,21 +241,11 @@ constrained_objective_v1 <- function(w, R, constraints, ..., trace=FALSE, normal
             if(!is.null(RBupper) | !is.null(RBlower)){
                 out = out + penalty * objective$multiplier * sum( (percrisk-RBupper)*( percrisk > RBupper ),na.rm=TRUE ) + penalty*sum( (RBlower-percrisk)*( percrisk < RBlower  ),na.rm=TRUE  )
             }
-#             if(!is.null(objective$min_concentration)){
-#                 if(isTRUE(objective$min_concentration)){
-#                     max_conc<-max(tmp_measure[[2]]) #second element is the contribution in absolute terms
-#                     # out=out + penalty * objective$multiplier * max_conc
-#                     out = out + objective$multiplier * max_conc
-#                 }
-#             }
-            # Combined min_con and min_dif to take advantage of a better concentration obj measure
             if(!is.null(objective$min_concentration) || !is.null(objective$min_max)){
                 if(isTRUE(objective$min_concentration)){
-#                     max_diff<-max(tmp_measure[[2]]-(sum(tmp_measure[[2]])/length(tmp_measure[[2]]))) #second element is the contribution in absolute terms
                   # Uses Herfindahl index to calculate concentration; added scaling perc diffs back to univariate numbers
-                    max_diff <- sqrt(sum(tmp_measure[[3]]^2))/100  #third element is the contribution in percentage terms
-                    # out = out + penalty * objective$multiplier * max_diff
-                    out = out + penalty*objective$multiplier * max_diff
+                    conc <- sqrt(sum(tmp_measure[[3]]^2))/100  #third element is the contribution in percentage terms
+                    out = out + penalty*objective$multiplier * conc
                 }
                 if(isTRUE(objective$min_max)){
                       total_risk <- tmp_measure[[1]]
@@ -714,21 +704,11 @@ constrained_objective <- constrained_objective_v2 <- function(w, R, portfolio, .
           if(!is.null(RBupper) | !is.null(RBlower)){
             out = out + penalty * objective$multiplier * sum( (percrisk-RBupper)*( percrisk > RBupper ),na.rm=TRUE ) + penalty*sum( (RBlower-percrisk)*( percrisk < RBlower  ),na.rm=TRUE  )
           }
-          #             if(!is.null(objective$min_concentration)){
-          #                 if(isTRUE(objective$min_concentration)){
-          #                     max_conc<-max(tmp_measure[[2]]) #second element is the contribution in absolute terms
-          #                     # out=out + penalty * 
-          #                     out = out + 
-          #                 }
-          #             }
-          # Combined min_con and min_dif to take advantage of a better concentration obj measure
           if(!is.null(objective$min_concentration) || !is.null(objective$min_max)){
             if(isTRUE(objective$min_concentration)){
-              # max_diff<-max(tmp_measure[[2]]-(sum(tmp_measure[[2]])/length(tmp_measure[[2]]))) #second element is the contribution in absolute terms
               # Uses Herfindahl index to calculate concentration; added scaling perc diffs back to univariate numbers
-              max_diff <- sqrt(sum(tmp_measure[[3]]^2))/100  #third element is the contribution in percentage terms
-              # out = out + penalty * objective$multiplier * max_diff
-              out = out + penalty*objective$multiplier * max_diff
+              conc <- sqrt(sum(tmp_measure[[3]]^2))/100  #third element is the contribution in percentage terms
+              out = out + penalty*objective$multiplier * conc
             }
             if(isTRUE(objective$min_max)){
                total_risk <- tmp_measure[[1]]
