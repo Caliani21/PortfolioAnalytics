@@ -258,9 +258,16 @@ constrained_objective_v1 <- function(w, R, constraints, ..., trace=FALSE, normal
                     out = out + penalty*objective$multiplier * max_diff
                 }
                 if(isTRUE(objective$min_concentration)){
-                    max_conc <- max(tmp_measure[[2]]) # second element is the contribution in absolute terms
-                    out = out + penalty * objective$multiplier * max_conc
-                }
+                      total_risk <- tmp_measure[[1]]
+                      max_conc <- max(tmp_measure[[2]])
+                      # Domain restriction: risk decomposition requires positive total risk.
+                      # When CVaR <= 0 (tail gains), concentration is undefined — penalize.
+                      if(is.na(total_risk) || total_risk <= 0){
+                        out <- out + penalty
+                      } else {
+                        out <- out + penalty * objective$multiplier * max_conc
+                      }
+                    }
             }
           } # end handling of risk_budget objective
 
