@@ -347,7 +347,7 @@ portfolio_risk_objective <- function(name, target=NULL, arguments=NULL, multipli
 #' @return object of class 'risk_budget_objective'
 #' @author Brian G. Peterson
 #' @export
-risk_budget_objective <- function(assets, name, target=NULL, arguments=NULL, multiplier=1, enabled=TRUE, ..., min_prisk, max_prisk, min_concentration=FALSE, min_difference=FALSE )
+risk_budget_objective <- function(assets, name, target=NULL, arguments=NULL, multiplier=1, enabled=TRUE, ..., min_prisk, max_prisk, min_concentration=FALSE, min_max=FALSE )
 {
   if(is.null(arguments$portfolio_method)) arguments$portfolio_method="component"
   
@@ -383,7 +383,7 @@ risk_budget_objective <- function(assets, name, target=NULL, arguments=NULL, mul
   Objective$min_prisk = min_prisk
   Objective$max_prisk = max_prisk
   Objective$min_concentration<-min_concentration
-  Objective$min_difference<-min_difference
+  Objective$min_max<-min_max
   
   return(Objective)
 } # end risk_budget_objective constructor
