@@ -376,7 +376,7 @@ risk_budget_objective <- function(assets, name, target=NULL, arguments=NULL, mul
   if(!hasArg(max_prisk)) max_prisk = NULL
   if(!hasArg(min_prisk)) min_prisk = NULL
   
-  if (is.null(min_prisk) & is.null(max_prisk)) 
+  if (is.null(min_prisk) & is.null(max_prisk) & !isTRUE(min_max))
       min_concentration<-TRUE
   
   Objective<-objective(name=name,target=target, arguments=arguments, multiplier=multiplier,enabled=enabled, objclass=c("risk_budget_objective","objective"), ... )
