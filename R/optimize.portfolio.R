@@ -915,7 +915,7 @@ optimize.portfolio <- optimize.portfolio_v2 <- function(
       }
       if(!hasArg(c)) {
         # JADE mutation parameter, this could maybe use some adjustment
-        tmp.c=.4
+        tmp.c=0.4
         DEcformals$c=tmp.c
       }
       if(!hasArg(storepopfrom)) {
