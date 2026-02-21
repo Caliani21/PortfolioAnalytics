@@ -126,8 +126,8 @@ optimize.portfolio_v1 <- function(
       DEcformals$reltol=reltol
       }
 		if(!hasArg(steptol)) {
-		  # number of assets times 1.5 tries to improve
-		  steptol=round(N*1.5)
+		  # number of assets times 3 tries to improve
+		  steptol=round(N*3)
       DEcformals$steptol=steptol
       }
 	    	if(!hasArg(F)) {
@@ -899,8 +899,8 @@ optimize.portfolio <- optimize.portfolio_v2 <- function(
         DEcformals$reltol=reltol
         } 
       if(!hasArg(steptol)) {
-        # number of assets times 1.5 tries to improve
-        steptol=round(N*1.5)
+        # number of assets times 3 tries to improve
+        steptol=round(N*3)
         DEcformals$steptol=steptol
         }
       if(!hasArg(F)) {
