@@ -126,8 +126,8 @@ optimize.portfolio_v1 <- function(
       DEcformals$reltol=reltol
       }
 		if(!hasArg(steptol)) {
-		  # number of assets times 3 tries to improve
-		  steptol=round(N*3)
+		  # number of assets times 1.5 tries to improve
+		  steptol=round(N*1.5)
       DEcformals$steptol=steptol
       }
 	    	if(!hasArg(F)) {
@@ -142,7 +142,7 @@ optimize.portfolio_v1 <- function(
       }
 		if(!hasArg(c)) {
 		  # JADE mutation parameter, this could maybe use some adjustment
-		  tmp.c=0.10
+		  tmp.c=.4
       DEcformals$c=tmp.c
       }
         if(!hasArg(storepopfrom)) {
@@ -899,8 +899,8 @@ optimize.portfolio <- optimize.portfolio_v2 <- function(
         DEcformals$reltol=reltol
         } 
       if(!hasArg(steptol)) {
-        # number of assets times 3 tries to improve
-        steptol=round(N*3)
+        # number of assets times 1.5 tries to improve
+        steptol=round(N*1.5)
         DEcformals$steptol=steptol
         }
       if(!hasArg(F)) {
@@ -915,7 +915,7 @@ optimize.portfolio <- optimize.portfolio_v2 <- function(
       }
       if(!hasArg(c)) {
         # JADE mutation parameter, this could maybe use some adjustment
-        tmp.c=0.10
+        tmp.c=.4
         DEcformals$c=tmp.c
       }
       if(!hasArg(storepopfrom)) {
