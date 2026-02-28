@@ -93,9 +93,8 @@ optimize.portfolio_v1 <- function(
     stopifnot("package:DEoptim" %in% search()  ||  requireNamespace("DEoptim",quietly = TRUE) )
     # DEoptim does 200 generations by default, so lets set the size of each generation to search_size/200)
     if(hasArg(itermax)) itermax=match.call(expand.dots=TRUE)$itermax else itermax=N*50
-    NP = round(search_size/itermax)
-    if(NP<(N*10)) NP <- N*10
-    if(NP>2000) NP=2000
+	NP <- search_size
+	if(NP > 2000) NP <- 2000
     if(!hasArg(itermax)) {
         itermax<-round(search_size/NP)
         if(itermax<50) itermax=50 #set minimum number of generations
@@ -867,8 +866,8 @@ optimize.portfolio <- optimize.portfolio_v2 <- function(
     # DEoptim does 200 generations by default, so lets set the size of each generation to search_size/200)
     if(hasArg(itermax)) itermax=match.call(expand.dots=TRUE)$itermax else itermax=N*50
     NP <- round(search_size/itermax)
-    if(NP < (N * 10)) NP <- N * 10
-    if(NP > 2000) NP <- 2000
+    NP <- search_size
+	if(NP > 2000) NP <- 2000
     if(!hasArg(itermax)) {
       itermax <- round(search_size / NP)
       if(itermax < 50) itermax <- 50 #set minimum number of generations
