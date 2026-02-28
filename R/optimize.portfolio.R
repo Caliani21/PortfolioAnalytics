@@ -865,7 +865,6 @@ optimize.portfolio <- optimize.portfolio_v2 <- function(
     stopifnot("package:DEoptim" %in% search()  ||  requireNamespace("DEoptim",quietly = TRUE))
     # DEoptim does 200 generations by default, so lets set the size of each generation to search_size/200)
     if(hasArg(itermax)) itermax=match.call(expand.dots=TRUE)$itermax else itermax=N*50
-    NP <- round(search_size/itermax)
     NP <- search_size
 	if(NP > 2000) NP <- 2000
     if(!hasArg(itermax)) {
